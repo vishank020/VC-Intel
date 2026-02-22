@@ -1,4 +1,4 @@
-## VC Intelligence Platform
+## VC Intelligence Platform   [preview🔗](https://vc-intel-project.vercel.app/)
 
 A precision AI scout for venture capital sourcing and triage.
 
