@@ -137,29 +137,29 @@ export default function SavedSearchesPage() {
         description="Quick access to your frequently used research queries"
       />
 
-      <div className="px-8 py-8">
+      <div className="px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-8">
         {searches.length === 0 ? (
-          <Card className="p-12 text-center border-border bg-card">
-            <h3 className="text-xl font-semibold text-foreground mb-2">No saved searches yet</h3>
-            <p className="text-muted-foreground mb-6">
+          <Card className="p-8 sm:p-12 text-center border-border bg-card">
+            <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2">No saved searches yet</h3>
+            <p className="text-sm sm:text-base text-muted-foreground mb-6">
               Your saved searches will appear here. Use filters on the Companies page to create
               new searches.
             </p>
             <Link href="/companies">
-              <Button>
+              <Button className="text-sm sm:text-base">
                 Go to Companies
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Button>
             </Link>
           </Card>
         ) : (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3">
             {searches.map((search) => (
               <Card key={search.id} className="border-border bg-card overflow-hidden flex flex-col">
-                <div className="p-6 flex-1">
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-foreground">{search.name}</h3>
+                <div className="p-4 sm:p-6 flex-1">
+                  <div className="flex items-start justify-between mb-3 gap-2">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base sm:text-lg font-semibold text-foreground truncate">{search.name}</h3>
                       <p className="text-xs text-muted-foreground mt-1">
                         Created {formatDate(search.createdAt)}
                       </p>

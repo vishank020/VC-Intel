@@ -109,20 +109,20 @@ export default function CompanyProfilePage() {
     <div>
       {/* Header */}
       <div className="border-b border-border bg-card sticky top-0 z-30">
-        <div className="ml-64 px-8 py-6">
-          <Link href="/companies" className="flex items-center gap-2 text-primary hover:underline mb-4">
+        <div className="px-4 sm:px-6 md:px-8 lg:ml-64 py-4 sm:py-5 md:py-6">
+          <Link href="/companies" className="flex items-center gap-2 text-primary hover:underline mb-4 text-sm sm:text-base">
             <ArrowLeft className="h-4 w-4" />
             Back to Companies
           </Link>
-          <div className="flex items-start justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-foreground">{company.name}</h1>
-              <p className="text-muted-foreground mt-1">{company.description}</p>
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+            <div className="min-w-0">
+              <h1 className="text-2xl sm:text-3xl font-bold text-foreground truncate">{company.name}</h1>
+              <p className="text-sm sm:text-base text-muted-foreground mt-1 truncate">{company.description}</p>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-shrink-0">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant={savedToList ? 'default' : 'outline'} size="sm">
+                  <Button variant={savedToList ? 'default' : 'outline'} size="sm" className="text-xs sm:text-sm">
                     <Bookmark className={`h-4 w-4 mr-2 ${savedToList ? 'fill-current' : ''}`} />
                     Save to List
                   </Button>
@@ -153,40 +153,40 @@ export default function CompanyProfilePage() {
       </div>
 
       {/* Content */}
-      <div className="ml-64 px-8 py-8">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <div className="px-4 sm:px-6 md:px-8 lg:ml-64 py-4 sm:py-6 md:py-8">
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 md:gap-8 lg:grid-cols-3">
           {/* Main Content */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-4 sm:space-y-6">
             {/* Overview */}
-            <Card className="p-6 border-border bg-card">
-              <h2 className="text-xl font-semibold text-foreground mb-4">Overview</h2>
-              <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+            <Card className="p-4 sm:p-6 border-border bg-card">
+              <h2 className="text-lg sm:text-xl font-semibold text-foreground mb-4">Overview</h2>
+              <div className="grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-4">
                 <div>
-                  <p className="text-sm text-muted-foreground mb-1">Industry</p>
-                  <p className="font-semibold text-foreground">{company.industry}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-1">Industry</p>
+                  <p className="text-sm sm:text-base font-semibold text-foreground truncate">{company.industry}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground mb-1">Stage</p>
-                  <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-1">Stage</p>
+                  <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-xs">
                     {company.stage}
                   </Badge>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground mb-1">Founded</p>
-                  <p className="font-semibold text-foreground">{company.foundedYear}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-1">Founded</p>
+                  <p className="text-sm sm:text-base font-semibold text-foreground">{company.foundedYear}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground mb-1">Location</p>
-                  <p className="font-semibold text-foreground">{company.location}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-1">Location</p>
+                  <p className="text-sm sm:text-base font-semibold text-foreground truncate">{company.location}</p>
                 </div>
               </div>
               {company.website && (
-                <div className="mt-6 pt-6 border-t border-border">
+                <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-border">
                   <a
                     href={company.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-primary hover:underline"
+                    className="flex items-center gap-2 text-primary hover:underline text-sm sm:text-base"
                   >
                     Visit Website
                     <ExternalLink className="h-4 w-4" />
@@ -197,7 +197,7 @@ export default function CompanyProfilePage() {
 
             {/* Signals Timeline */}
             {signals.length > 0 && (
-              <Card className="p-6 border-border bg-card">
+              <Card className="p-4 sm:p-6 border-border bg-card">
                 <h2 className="text-xl font-semibold text-foreground mb-4">Signals Timeline</h2>
                 <div className="space-y-4">
                   {signals.map((signal) => (

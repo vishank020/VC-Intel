@@ -113,11 +113,11 @@ export default function CompaniesPage() {
         <>
             <Header title="Companies" description="Explore and research investment opportunities" />
 
-            <div className="px-8 py-8 space-y-6">
+            <div className="px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-8 space-y-4 sm:space-y-6">
                 {/* Filters */}
-                <div className="bg-card rounded-lg border border-border p-6 space-y-4">
-                    <h3 className="font-semibold text-foreground">Filters</h3>
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+                <div className="bg-card rounded-lg border border-border p-4 sm:p-6 space-y-4">
+                    <h3 className="font-semibold text-foreground text-sm sm:text-base">Filters</h3>
+                    <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-4">
                         <div>
                             <label className="text-sm font-medium text-foreground block mb-2">
                                 Industry
@@ -193,60 +193,106 @@ export default function CompaniesPage() {
                 </div>
 
                 {/* Results Info */}
-                <div className="flex justify-between items-center">
-                    <p className="text-sm text-muted-foreground">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                    <p className="text-xs sm:text-sm text-muted-foreground">
                         Showing {paginatedData.length > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0}–
                         {Math.min(currentPage * itemsPerPage, filteredAndSorted.length)} of{' '}
                         {filteredAndSorted.length} companies
                     </p>
                 </div>
 
-                {/* Table */}
-                <div className="bg-card rounded-lg border border-border overflow-hidden">
+                {/* Mobile Card View (< md) */}
+                <div className="md:hidden space-y-3">
+                    {paginatedData.length > 0 ? (
+                        paginatedData.map((company) => (
+                            <div key={company.id} className="bg-card border border-border rounded-lg p-4">
+                                <div className="flex flex-col gap-3">
+                                    {/* Header */}
+                                    <div className="flex flex-col gap-1">
+                                        <h3 className="font-semibold text-foreground text-sm truncate">{company.name}</h3>
+                                        <p className="text-xs text-muted-foreground line-clamp-2">{company.description}</p>
+                                    </div>
+
+                                    {/* Details Grid */}
+                                    <div className="grid grid-cols-3 gap-3">
+                                        <div>
+                                            <p className="text-xs text-muted-foreground mb-1">Industry</p>
+                                            <p className="text-xs font-medium text-foreground truncate">{company.industry}</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-xs text-muted-foreground mb-1">Stage</p>
+                                            <Badge className={`${getStageBadgeColor(company.stage)} text-xs`}>
+                                                {company.stage}
+                                            </Badge>
+                                        </div>
+                                        <div>
+                                            <p className="text-xs text-muted-foreground mb-1">Founded</p>
+                                            <p className="text-xs font-medium text-foreground">{company.foundedYear}</p>
+                                        </div>
+                                    </div>
+
+                                    {/* Action Button */}
+                                    <Link href={`/companies/${company.id}`} className="w-full">
+                                        <Button variant="default" size="sm" className="w-full text-xs">
+                                            View Details
+                                        </Button>
+                                    </Link>
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="text-center py-8 text-muted-foreground text-sm">
+                            No companies found matching your filters.
+                        </div>
+                    )}
+                </div>
+
+                {/* Desktop Table View (>= md) */}
+                <div className="hidden md:block bg-card rounded-lg border border-border overflow-hidden overflow-x-auto">
                     <Table>
                         <TableHeader>
                             <TableRow className="border-b border-border hover:bg-transparent">
-                                <TableHead className="text-foreground cursor-pointer" onClick={() => toggleSort('name')}>
-                                    <div className="flex items-center gap-2">
+                                <TableHead className="text-foreground cursor-pointer text-xs sm:text-sm" onClick={() => toggleSort('name')}>
+                                    <div className="flex items-center gap-1 sm:gap-2">
                                         Company
-                                        <ArrowUpDown className="h-4 w-4" />
+                                        <ArrowUpDown className="h-3 w-3 sm:h-4 sm:w-4" />
                                     </div>
                                 </TableHead>
-                                <TableHead className="text-foreground">Industry</TableHead>
-                                <TableHead className="text-foreground">Stage</TableHead>
-                                <TableHead className="text-foreground cursor-pointer" onClick={() => toggleSort('foundedYear')}>
-                                    <div className="flex items-center gap-2">
+                                <TableHead className="text-foreground text-xs sm:text-sm">Industry</TableHead>
+                                <TableHead className="text-foreground hidden lg:table-cell text-xs sm:text-sm">Stage</TableHead>
+                                <TableHead className="text-foreground cursor-pointer hidden lg:table-cell text-xs sm:text-sm" onClick={() => toggleSort('foundedYear')}>
+                                    <div className="flex items-center gap-1 sm:gap-2">
                                         Founded
-                                        <ArrowUpDown className="h-4 w-4" />
+                                        <ArrowUpDown className="h-3 w-3 sm:h-4 sm:w-4" />
                                     </div>
                                 </TableHead>
-                                <TableHead className="text-foreground cursor-pointer" onClick={() => toggleSort('location')}>
-                                    <div className="flex items-center gap-2">
+                                <TableHead className="text-foreground cursor-pointer hidden xl:table-cell text-xs sm:text-sm" onClick={() => toggleSort('location')}>
+                                    <div className="flex items-center gap-1 sm:gap-2">
                                         Location
-                                        <ArrowUpDown className="h-4 w-4" />
+                                        <ArrowUpDown className="h-3 w-3 sm:h-4 sm:w-4" />
                                     </div>
                                 </TableHead>
-                                <TableHead className="text-foreground text-right">Action</TableHead>
+                                <TableHead className="text-foreground text-right text-xs sm:text-sm">Action</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
                             {paginatedData.length > 0 ? (
                                 paginatedData.map((company) => (
                                     <TableRow key={company.id} className="border-b border-border hover:bg-muted">
-                                        <TableCell className="font-medium text-foreground">
+                                        <TableCell className="font-medium text-foreground text-xs sm:text-sm">
                                             <div>
-                                                <p className="font-semibold">{company.name}</p>
-                                                <p className="text-sm text-muted-foreground">{company.description}</p>
+                                                <p className="font-semibold truncate">{company.name}</p>
+                                                <p className="text-xs text-muted-foreground truncate">{company.description}</p>
                                             </div>
                                         </TableCell>
-                                        <TableCell className="text-foreground text-sm">{company.industry}</TableCell>
-                                        <TableCell>
+                                        <TableCell className="text-foreground text-xs sm:text-sm">{company.industry}</TableCell>
+                                        <TableCell className="hidden lg:table-cell">
                                             <Badge className={getStageBadgeColor(company.stage)}>
                                                 {company.stage}
                                             </Badge>
                                         </TableCell>
-                                        <TableCell className="text-foreground text-sm">{company.foundedYear}</TableCell>
-                                        <TableCell className="text-foreground text-sm">{company.location}</TableCell>
+                                        <TableCell className="text-foreground text-xs sm:text-sm hidden lg:table-cell">{company.foundedYear}</TableCell>
+                                        <TableCell className="text-foreground text-xs sm:text-sm hidden xl:table-cell">{company.location}</TableCell>
                                         <TableCell className="text-right">
                                             <Link href={`/companies/${company.id}`}>
                                                 <Button variant="ghost" size="sm" className="text-primary hover:bg-primary/10">

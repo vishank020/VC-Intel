@@ -160,12 +160,12 @@ export default function ListsPage() {
     <>
       <Header title="Lists" description="Organize and manage your company collections" />
 
-      <div className="px-8 py-8">
+      <div className="px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-8">
         {/* Create List Button */}
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
-              <Button className="gap-2">
+              <Button className="gap-2 text-sm sm:text-base">
                 <Plus className="h-4 w-4" />
                 Create New List
               </Button>
@@ -233,15 +233,15 @@ export default function ListsPage() {
             </Dialog>
           </Card>
         ) : (
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
             {lists.map((list) => (
               <Card key={list.id} className="border-border bg-card flex flex-col">
-                <div className="p-6 border-b border-border">
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-foreground">{list.name}</h3>
+                <div className="p-4 sm:p-6 border-b border-border">
+                  <div className="flex items-start justify-between mb-3 gap-2">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base sm:text-lg font-semibold text-foreground truncate">{list.name}</h3>
                       {list.description && (
-                        <p className="text-sm text-muted-foreground mt-1">
+                        <p className="text-xs sm:text-sm text-muted-foreground mt-1 truncate">
                           {list.description}
                         </p>
                       )}
