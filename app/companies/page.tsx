@@ -115,21 +115,22 @@ export default function CompaniesPage() {
 
             <div className="px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-8 space-y-4 sm:space-y-6">
                 {/* Filters */}
-                <div className="bg-card rounded-lg border border-border p-4 sm:p-6 space-y-4">
-                    <h3 className="font-semibold text-foreground text-sm sm:text-base">Filters</h3>
-                    <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-4">
+                <div className="bg-background rounded-xl border border-border shadow-sm p-5 sm:p-6 space-y-5">
+                    <h3 className="font-semibold text-foreground text-base">Filters</h3>
+                    <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-4">
+                        {/* Industry */}
                         <div>
                             <label className="text-sm font-medium text-foreground block mb-2">
                                 Industry
                             </label>
                             <Select value={selectedIndustry} onValueChange={setSelectedIndustry}>
-                                <SelectTrigger className="bg-input border-border">
+                                <SelectTrigger className="bg-background border-border shadow-sm focus:ring-primary/30 focus:border-primary">
                                     <SelectValue placeholder="All industries" />
                                 </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="all">All industries</SelectItem>
+                                <SelectContent className="bg-background border-border shadow-md max-h-[300px]">
+                                    <SelectItem value="all" className="text-foreground">All industries</SelectItem>
                                     {industries.map((industry) => (
-                                        <SelectItem key={industry} value={industry}>
+                                        <SelectItem key={industry} value={industry} className="text-foreground">
                                             {industry}
                                         </SelectItem>
                                     ))}
@@ -137,18 +138,19 @@ export default function CompaniesPage() {
                             </Select>
                         </div>
 
+                        {/* Stage */}
                         <div>
                             <label className="text-sm font-medium text-foreground block mb-2">
                                 Stage
                             </label>
                             <Select value={selectedStage} onValueChange={setSelectedStage}>
-                                <SelectTrigger className="bg-input border-border">
+                                <SelectTrigger className="bg-background border-border shadow-sm focus:ring-primary/30 focus:border-primary">
                                     <SelectValue placeholder="All stages" />
                                 </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="all">All stages</SelectItem>
+                                <SelectContent className="bg-background border-border shadow-md max-h-[300px]">
+                                    <SelectItem value="all" className="text-foreground">All stages</SelectItem>
                                     {stages.map((stage) => (
-                                        <SelectItem key={stage} value={stage}>
+                                        <SelectItem key={stage} value={stage} className="text-foreground">
                                             {stage}
                                         </SelectItem>
                                     ))}
@@ -156,18 +158,19 @@ export default function CompaniesPage() {
                             </Select>
                         </div>
 
+                        {/* Location */}
                         <div>
                             <label className="text-sm font-medium text-foreground block mb-2">
                                 Location
                             </label>
                             <Select value={selectedLocation} onValueChange={setSelectedLocation}>
-                                <SelectTrigger className="bg-input border-border">
+                                <SelectTrigger className="bg-background border-border shadow-sm focus:ring-primary/30 focus:border-primary">
                                     <SelectValue placeholder="All locations" />
                                 </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="all">All locations</SelectItem>
+                                <SelectContent className="bg-background border-border shadow-md max-h-[300px]">
+                                    <SelectItem value="all" className="text-foreground">All locations</SelectItem>
                                     {locations.map((location) => (
-                                        <SelectItem key={location} value={location}>
+                                        <SelectItem key={location} value={location} className="text-foreground">
                                             {location}
                                         </SelectItem>
                                     ))}
@@ -175,6 +178,7 @@ export default function CompaniesPage() {
                             </Select>
                         </div>
 
+                        {/* Search */}
                         <div>
                             <label className="text-sm font-medium text-foreground block mb-2">
                                 Search
@@ -186,7 +190,7 @@ export default function CompaniesPage() {
                                     setSearchQuery(e.target.value);
                                     setCurrentPage(1);
                                 }}
-                                className="bg-input border-border"
+                                className="bg-background border-border shadow-sm focus-visible:ring-primary/30 focus-visible:border-primary"
                             />
                         </div>
                     </div>
