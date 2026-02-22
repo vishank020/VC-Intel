@@ -1,198 +1,109 @@
-# VC Intelligence Platform
+## VC Intelligence Platform
 
-A premium web application for researching companies and managing investment intelligence. Built with Next.js, React, and Tailwind CSS.
+A precision AI scout for venture capital sourcing and triage.
 
-## Overview
+Venture capital teams dedicate substantial time each week to sourcing and triage: scanning inbound deals, parsing newsletters, querying databases, monitoring founder movements, and identifying early signals before funding rounds become obvious. This work is repetitive, fragmented across tools, and deeply thesis-dependent—what qualifies as a strong lead for one fund is often pure noise for another. Existing workflows frequently default to generic alerts, broad keyword searches, and manual spreadsheets, resulting in duplicated effort, inconsistent tagging, shallow profiles, and difficulty translating “what we invest in” into durable, repeatable filters and scouting processes.
 
-The VC Intelligence Platform is a full-featured SaaS application designed for venture capitalists, investors, and business analysts to research companies, organize findings, and maintain a searchable database of prospects and targets.
+This project delivers a focused solution: a modern intelligence interface that turns a fund’s unique investment thesis into an always-on discovery engine. It reduces noise, surfaces high-signal companies earlier, and ensures every recommendation is explainable with transparent sources. The core experience combines:
 
-## Core Features
+1. Fast, faceted search and profile exploration
+2. On-demand live enrichment that pulls and summarizes real public website content
+3. Actionable organization tools (lists, notes, saved searches)
 
-### 1. Companies Database
-- **Search & Filter**: Full-text search across 20+ mock companies
-- **Advanced Filtering**: Filter by industry, funding stage, and location
-- **Sorting**: Sort by company name, founding year, or location
-- **Pagination**: Browse companies with intuitive pagination controls
-- **Company Details**: Click any company to view detailed profile information
+The user journey is designed to feel like a production-grade product: discover companies through intuitive search and filters → open a detailed profile → enrich with fresh web data → generate thesis-aligned insights → take immediate action (save to list, add notes, export). Built to be highly customizable per fund (thesis-first) while remaining fully transparent about data sources and reasoning.
 
-### 2. Company Profiles
-- **Overview Section**: Key metrics including founded year, stage, location, and founders
-- **Signals Timeline**: Historical company updates and milestones
-- **Research Notes**: Add custom notes and annotations for each company
-- **AI Enrichment**: Click the "Enrich" button to generate AI-powered company intelligence including:
-  - Executive summary
-  - Key capabilities
-  - Industry keywords
-  - Derived signals and insights
-  - Source references
-- **Save to List**: Quick access dropdown to add companies to your custom lists
+### Core Alignment with Assignment Goals
 
-### 3. Lists Management
-- **Create Lists**: Build custom collections to organize companies by investment criteria
-- **Add/Remove Companies**: Manage list contents dynamically
-- **Export Data**: Download lists as CSV or JSON files
-- **Delete Lists**: Remove lists with confirmation dialogs
-- **Persistent Storage**: All lists automatically saved to browser localStorage
+- **Problem addressed**: Repetitive, fragmented, thesis-agnostic sourcing workflows
+- **Solution delivered**: Thesis-driven, explainable discovery with live public-web enrichment
+- **MVP focus**: Usable interface + one complete live enrichment path (server-side, secure, cached)
+- **Inspiration**: Harmonic.ai (workflow), Cardinal.ai (thesis orientation), PitchBook/Crunchbase/etc. (patterns)
 
-### 4. Saved Searches
-- **Search History**: Pre-populated with example searches like "Series B Enterprise SaaS" and "Seed FinTech"
-- **Rerun Searches**: Execute saved searches and update last-run timestamps
-- **Search Metadata**: View filter descriptions and result counts
-- **Manage Searches**: Delete searches you no longer need
-- **Quick Access**: Easily return to frequently used search queries
+Built as a take-home assignment for the VC Intelligence Interface + Live Enrichment role (February 2026).
 
-### 5. Navigation & UI
-- **Sidebar Navigation**: Fixed left sidebar with links to all major sections
-- **Responsive Design**: Clean, professional interface that works on all screen sizes
-- **Dark/Light Mode**: Full support for both light and dark themes
-- **Search Bar**: Global search functionality in the header
+### Key Differentiators vs. Existing Tools
+- **Live, on-demand enrichment** from public websites (not static database pulls)
+- **Transparent sources + timestamps** for every extracted field
+- **Server-side only** AI processing (keys never exposed client-side)
+- **Thesis-first** design (inspiration from Harmonic.ai and Cardinal.ai workflows)
 
-## Application Structure
+## Features Implemented (MVP Scope)
 
-```
-app/
-├── page.tsx                          # Home page (redirects to companies)
-├── layout.tsx                        # Root layout with sidebar
-├── globals.css                       # Design tokens and styles
-├── companies/
-│   ├── page.tsx                      # Companies list page
-│   └── [id]/page.tsx                 # Individual company profile
-├── lists/page.tsx                    # Lists management page
-├── saved/page.tsx                    # Saved searches page
-└── api/
-    └── enrich/route.ts               # AI enrichment API endpoint
+- **Companies Database**  
+  Search, multi-filter (industry, stage, location), sort, pagination, real company profiles
 
-components/
-├── sidebar.tsx                       # Main navigation sidebar
-└── header.tsx                        # Search and header bar
+- **Company Profile**  
+  Overview metrics, signals timeline, research notes (localStorage), save-to-list dropdown  
+  **Live AI Enrichment** — one-click fetch + Gemini extraction of:  
+  • Executive summary (1–2 sentences)  
+  • What they do (3–6 bullets)  
+  • Keywords (5–10)  
+  • Derived signals (2–4 inferred insights)  
+  • Sources (URLs + timestamps)
 
-lib/
-├── mock-data.ts                      # Mock company and list data
-└── utils.ts                          # Utility functions
-```
+- **Lists Management**  
+  Create lists, add/remove companies, export as JSON (CSV stretch)
+
+- **Saved Searches**  
+  Basic save & re-run capability (stretch: full filter persistence)
+
+- **Navigation & UX**  
+  Sidebar + global search bar, responsive layout, dark/light mode support, professional typography (Geist)
+
+- **Data & Persistence**  
+  20 real companies in mock data (with live websites)  
+  All user data (notes, lists, saved searches, enrichment cache) persisted in browser localStorage
 
 ## Tech Stack
 
-- **Framework**: Next.js 16 with App Router
-- **UI Library**: shadcn/ui components
-- **Styling**: Tailwind CSS v4
-- **State Management**: React hooks with localStorage persistence
-- **Typography**: Geist font family
-- **Icons**: Lucide React
+- Framework: Next.js 14+ (App Router)  
+- UI: shadcn/ui components  
+- Styling: Tailwind CSS v4  
+- AI: Google Gemini (model: gemini-3-flash-preview)  
+- Icons: Lucide React  
+- Fonts: Geist Sans / Mono  
+- Persistence: Browser localStorage (no backend required for MVP)
 
-## Design System
+## Live Enrichment Implementation
 
-### Color Scheme
-- **Primary**: Teal/Blue (#0066FF)
-- **Secondary**: Cyan (#00D9FF)
-- **Background**: Clean white/dark gray
-- **Accents**: Professional blue tones
-
-### Features
-- Semantic design tokens for consistent theming
-- Light and dark mode support
-- Professional enterprise aesthetic
-- Responsive flexbox-based layouts
-
-## Data Persistence
-
-All user data is automatically persisted to browser localStorage:
-- Custom lists and their company contents
-- Saved search queries and metadata
-- Research notes on company profiles
-
-Data syncs in real-time across the application without requiring a backend.
+- Endpoint: `POST /api/enrich` (Next.js Route Handler)  
+- Process:  
+  1. Client sends company website URL  
+  2. Server fetches public homepage (no auth, no evasion)  
+  3. Content cleaned and sent to Gemini with structured JSON prompt  
+  4. Returns: summary, whatTheyDo, keywords, derivedSignals, sources  
+- Caching: results stored in localStorage per company (key: `enrich-{id}`)  
+- Security: API key only in server environment — never exposed to browser  
+- Transparency: every field includes source URL + exact timestamp
 
 ## Getting Started
+
+### Prerequisites
+- Node.js
+- npm/yarn
 
 ### Installation
 
 ```bash
-# Clone or download the project
-git clone <repository-url>
-cd v0-project
+- Clone the repository
+git clone <your-repo-url>
+cd vc-intelligence-platform
 
-# Install dependencies
-pnpm install
+- Install dependencies
+npm install
 
-# Run the development server
-pnpm dev
+** Create .env.local and add your Gemini key
+cp .env.local
+- Then edit .env.local:
+- GEMINI_API_KEY=your-key-from-aistudio.google.com
 ```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser. You'll be automatically redirected to the companies page.
-
-### Usage Workflows
-
-#### Researching a Company
-1. Go to **Companies** page
-2. Use search bar to find a company
-3. Click the company name to view profile
-4. Click **Enrich** to generate AI insights
-5. Add notes in the research section
-6. Click "Save to List" to organize your findings
-
-#### Building a Target List
-1. Go to **Lists** page
-2. Click "Create New List"
-3. Enter list name and description
-4. Add companies from the Companies page using "Save to List"
-5. Export as CSV/JSON when ready to share
-6. Delete list when no longer needed
-
-#### Using Saved Searches
-1. Go to **Saved Searches** page
-2. Click any saved search to view results
-3. Click "Rerun" to update the search timestamp
-4. Delete searches you no longer use
-
-## Key Pages
-
-| Page | Route | Purpose |
-|------|-------|---------|
-| Companies | `/companies` | Browse and search company database |
-| Company Profile | `/companies/[id]` | View detailed company info and enrich data |
-| Lists | `/lists` | Create and manage custom company lists |
-| Saved Searches | `/saved` | Access frequently used search queries |
-
-## API Endpoints
-
-### Enrich Company Data
-- **Endpoint**: `POST /api/enrich`
-- **Parameters**: Company data object
-- **Returns**: Enriched company intelligence with summary, capabilities, keywords, and signals
-
-## Features Highlights
-
-- **Real-time Search**: Instant filtering as you type
-- **Smart Filtering**: Multi-field filter combinations
-- **Export Capabilities**: Download lists in standard formats
-- **Notes Integration**: Add research observations directly on profiles
-- **Quick Actions**: Save to list, enrich, and navigate without page reloads
-- **Browser Storage**: No account needed, data stays private on your device
-- **Professional UI**: Enterprise-grade design suitable for investor presentations
-
-## Mock Data
-
-The application includes 20 pre-loaded companies across various industries and funding stages to demonstrate functionality. Companies include TechCorp, InnovateLabs, DataFlow Systems, FinanceAI, CloudHub, and more.
-
-## Browser Compatibility
-
-Works on all modern browsers that support localStorage and ES6 JavaScript:
-- Chrome/Edge 90+
-- Firefox 88+
-- Safari 14+
-
-## Future Enhancements
-
-Potential features for expansion:
-- Real API integration with live company databases
-- User authentication and cloud storage
-- Real AI/LLM integration for enrichment
-- Email alerts for target companies
-- Collaboration and team features
-- Custom report generation
-- Integration with CRM systems
-
 ---
+## Built by
 
-For questions or support, contact the development team.
+**Vishank Singh**  
+Full-stack developer & AI enthusiast  
+Mumbai, India  
+
+GitHub: https://github.com/vishank020  
+LinkedIn: https://www.linkedin.com/in/vishank-singh/  
+Portfolio: https://vishanksingh.vercel.app/ 
